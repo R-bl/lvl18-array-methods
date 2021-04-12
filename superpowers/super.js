@@ -128,8 +128,13 @@ console.log(heavyHeroNamesChained);
 const firstAppearance = superheroes.map((hero) => hero.first_appearance);
 console.log("first appearance:", firstAppearance);
 
-// Maak een array met alle superhelden van DC Comics. Is dat gelukt? Herhaal de bovenstaande functie dan en maak ook een array met alle superhelden van Marvel Comics.
+// Maak een array met alle superhelden van DC Comics.
 const DC = superheroes.filter((hero) => hero.publisher === "DC Comics");
 console.log(DC);
 const marvel = superheroes.filter((hero) => hero.publisher === "Marvel Comics");
 console.log("DC Comics:", DC, "Marvel Comics:", marvel);
+
+const weightDcHeroes = DC.map((hero) => {
+  return hero.weight !== "unkown" ? parseInt(hero.weight) : 0;
+}).reduce((weight1, weight2) => weight1 + weight2);
+console.log(weightDcHeroes, DC);
