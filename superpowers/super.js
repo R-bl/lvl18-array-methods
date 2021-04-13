@@ -128,13 +128,56 @@ console.log(heavyHeroNamesChained);
 const firstAppearance = superheroes.map((hero) => hero.first_appearance);
 console.log("first appearance:", firstAppearance);
 
-// Maak een array met alle superhelden van DC Comics.
+// 5 Maak een array met alle superhelden van DC Comics.
 const DC = superheroes.filter((hero) => hero.publisher === "DC Comics");
 console.log(DC);
 const marvel = superheroes.filter((hero) => hero.publisher === "Marvel Comics");
 console.log("DC Comics:", DC, "Marvel Comics:", marvel);
 
+// 6 Tel het gewicht van alle superhelden van DC Comics bij elkaar op
 const weightDcHeroes = DC.map((hero) => {
-  return hero.weight !== "unkown" ? parseInt(hero.weight) : 0;
+  return hero.weight !== "unknown" ? parseInt(hero.weight, 10) : 0;
 }).reduce((weight1, weight2) => weight1 + weight2);
-console.log(weightDcHeroes, DC);
+console.log("Total Weight DC heroes", weightDcHeroes);
+
+// 7 Doe hetzelfde met alle superhelden van Marvel Comics
+
+const weightMarvelHeroes = marvel
+  .map((hero) => {
+    return hero.weight !== "unknown" ? parseInt(hero.weight, 10) : 0;
+  })
+  .reduce((weight1, weight2) => weight1 + weight2);
+console.log("Total weight marvel heroes", weightMarvelHeroes);
+
+// 8 Bonus: zoek de zwaarste superheld!
+// eerst wil ik de weight van alle superhelden krijgen
+const getAllHeroes = superheroes.map((hero) => {
+  const getWeight =
+    superheroes.weight !== "unknown" ? parseInt(hero.weight, 10) : 0;
+  hero.weight = getWeight;
+  return hero;
+});
+// nu ik het gewicht van alle superhelden heb kan ik het nu filteren
+const getHeaviestHero = getAllHeroes.reduce((heavyHero, currentHero) => {
+  if (currentHero.weight > heavyHero.weight) {
+    return currentHero;
+  } else {
+    return heavyHero;
+  }
+});
+console.log("Biggest Heaviest hero", getHeaviestHero);
+
+// // testing with if
+// const marvelWeights = marvel.map((hero) => {
+//   if (hero.weight !== "unkown") {
+//     return parseInt(hero.weight, 10);
+//   } else {
+//     return 0;
+//   }
+// });
+
+// const sumWeightMarvel = marvelWeights.reduce((weight1, weight2) => {
+//   return weight1 + weight2;
+// });
+
+// console.log("Total Weight of", marvelWeights, sumWeightMarvel);
